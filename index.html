@@ -16,11 +16,11 @@
 </head>
 
 <body>
-    <header class="bg-primary text-white text-center py-4">
+    <header class="text-white text-center py-4">
         <h1>Personal Website</h1>
-        <nav class="nav justify-content-center nav-fill mx-5"> <!-- Margin too small! -->
+        <nav class="nav justify-content-center nav-fill mx-4"> <!-- Margin too small! -->
             <a class="nav-link text-white" aria-current="page" href="#">Home</a> <!-- aria-current? -->
-            <a class="nav-link text-white" href="#">About</a>
+            <a class="nav-link text-white" href="#about">About</a>
             <a class="nav-link text-white" href="#">Previous Work</a>
             <a class="nav-link text-white" href="#">Projects</a>
             <a class="nav-link text-white" href="#">Contact</a>
@@ -28,7 +28,62 @@
     </header>
     <main>
         <!-- Consider editing colors? -->
-        <section id="main-carousel" aria-details="Slideshow of images">
+        <section id="about" class="container my-2 py-5"> <!-- Experiment with (m)argin and (p)adding -->
+            <img src="src/profile.png" alt="Profile picture" class="float-start rounded-circle mb-3" />
+            <h2>About Me</h2>
+            <p>Hi, I'm Aaron Stave, and I'm currently pursuing my studies in web development as part of my academic
+                journey. This portfolio is the culmination of my capstone project, where I've applied the skills I've
+                been building in HTML, CSS, and JavaScript to create a space that reflects both my technical growth and
+                my creative interests. I've always been drawn to the intersection of design and technology, and web
+                development has given me the perfect outlet to combine problem-solving with creativity. <br /> <br />
+                Throughout my coursework, I've worked on projects that range from simple static pages to interactive
+                applications, each one teaching me something new about user experience, accessibility, and the
+                importance of clean, maintainable code. I enjoy exploring new frameworks and tools, and I'm motivated by
+                the challenge of transforming ideas into functional, visually engaging websites. My long-term goal is to
+                continue expanding my technical toolkit and eventually contribute to projects that make a meaningful
+                impact, whether that's through front-end design, full-stack development, or user-focused digital
+                solutions. <br /><br />
+                Outside of coding, I'm curious by nature and love learning new things — whether that's experimenting
+                with design concepts, diving into emerging technologies, or finding inspiration in everyday experiences.
+                I believe that the best developers are lifelong learners, and I'm excited to keep growing, building, and
+                sharing my work with the world.</p>
+        </section>
+        <section class="container my-5 py-5">
+            <!-- <img src="src/resume.pdf" alt="Resume PDF" class="float-end mb-3" /> -->
+            <!-- <object data="src/resume.pdf" type="application/pdf" width="60%" height="600px">
+                <p>It appears you do not have a PDF plugin for this browser. You can <a href="src/resume.pdf">click here
+                        to download my resume.</a></p>
+            </object> -->
+            <img src="src/resume.jpg" alt="Resume thumbnail" class="float-end" width="30%" height="auto"
+                data-bs-toggle="modal" data-bs-target="#resumeModal" style="cursor:pointer;">
+            <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <img src="src/resume.jpg" alt="Full resume" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2>Previous Work</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, tenetur aliquid molestias similique aut
+                quos vero repellat earum sed facere repudiandae impedit quae dicta ducimus repellendus neque non
+                eligendi totam! <br /><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur,
+                tempore. Odio ex nihil minima illum id ipsam eum sint et. Totam sed similique voluptatem ad asperiores
+                eaque. Impedit, ipsa doloremque!</p>
+            <br />
+            <h3>Skills:</h3>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Bootstrap</li>
+                <li>jQuery</li>
+            </ul>
+        </section>
+        <section id="main-carousel" aria-details="Project slideshow" class="container my-5 py-5">
+            <h2>Projects</h2>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
                 aria-describedby="main-carousel">
                 <div class="carousel-indicators">
@@ -65,90 +120,24 @@
                 </button>
             </div>
         </section>
-        <section class="container my-1 py-5"> <!-- Experiment with (m)argin and (p)adding -->
-            <h2>About Me</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit tempora cumque explicabo eligendi
-                ut voluptas maxime id nam inventore assumenda iste illum error corrupti, ab eius ipsam magni numquam
-                est.</p>
-        </section>
         <section class="container my-5 py-5">
-            <h2>Previous Work</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.</p>
-        </section>
-        <section class="container my-5 py-5">
-            <h2>Projects</h2>
-            <div class="container d-flex justify-content-center">
-                <div class="card d-inline-block w-25 mx-3">
-                    <h2 class="card-header">
-                        Featured
-                    </h2>
-                    <img src="https://placehold.co/300x150/697982/697982"
-                        class="card-img-top bg-secondary text-secondary" style="border-radius: 0;"
-                        alt="Blank placeholder image with a gray background">
-                    <div class="card-body">
-                        <h3 class="card-title">Special title treatment</h3>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo fugiat
-                            facilis
-                            nostrum rem
-                            recusandae omnis. Neque sequi mollitia explicabo delectus ullam ratione magnam molestiae
-                            fugiat
-                            repudiandae,
-                            facilis sapiente voluptas exercitationem?</p>
-                        <a href="#" class="btn btn-primary">Click Me</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Last updated 3 mins ago
-                    </div>
+            <form>
+                <h2>Contact Me</h2>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your Name" required />
                 </div>
-                <div class="card d-inline-block w-25 mx-3">
-                    <h2 class="card-header">
-                        Featured
-                    </h2>
-                    <img src="https://placehold.co/300x150/697982/697982"
-                        class="card-img-top bg-secondary text-secondary" style="border-radius: 0;"
-                        alt="Blank placeholder image with a gray background">
-                    <div class="card-body">
-                        <h3 class="card-title">Special title treatment</h3>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo fugiat
-                            facilis
-                            nostrum rem
-                            recusandae omnis. Neque sequi mollitia explicabo delectus ullam ratione magnam molestiae
-                            fugiat
-                            repudiandae,
-                            facilis sapiente voluptas exercitationem?</p>
-                        <a href="#" class="btn btn-primary">Click Me</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Last updated 3 mins ago
-                    </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="@email.com" required />
                 </div>
-                <div class="card d-inline-block w-25 mx-3">
-                    <h2 class="card-header">
-                        Featured
-                    </h2>
-                    <img src="https://placehold.co/300x150/697982/697982"
-                        class="card-img-top bg-secondary text-secondary" style="border-radius: 0;"
-                        alt="Blank placeholder image with a gray background">
-                    <div class="card-body">
-                        <h3 class="card-title">Special title treatment</h3>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo fugiat
-                            facilis
-                            nostrum rem
-                            recusandae omnis. Neque sequi mollitia explicabo delectus ullam ratione magnam molestiae
-                            fugiat
-                            repudiandae,
-                            facilis sapiente voluptas exercitationem?</p>
-                        <a href="#" class="btn btn-primary">Click Me</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Last updated 3 mins ago
-                    </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="5" placeholder="Your message here..."
+                        required></textarea>
                 </div>
-            </div>
-        </section>
-        <section class="container my-5 py-5">
-            <h2>Contact</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.</p>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </section>
     </main>
     <footer class="bg-dark text-white text-center py-2 footer">
