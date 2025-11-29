@@ -2,9 +2,22 @@
   box-sizing: border-box;
 }
 
+html {
+  /* background-color: yellow; */
+}
+
 body {
+  background-color: #f0f0f0;
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.2em;
+  margin: 0;
+}
+
+main {
+  background-color: white;
+  margin: 0 auto;
+  width: 70%;
+  padding: 1rem;
 }
 
 .footer {
@@ -31,4 +44,34 @@ header {
   width: 30%;
   height: auto;
   margin-right: 2.5rem;
+}
+
+#work_resume {
+  width: 40%;
+  height: auto;
+  margin-left: 2.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#contact {
+  width: 70%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+/* #contact form input,
+#contact form textarea {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+} */
+
+#contact form button {
+  padding: 0.5rem 1rem;
+  background-color: orange;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  align-items: center;
 }

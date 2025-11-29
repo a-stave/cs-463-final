@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sample Page</title>
-    <link rel="stylesheet" href="styles.css" />
     <!-- Bootstrap link... doublecheck javascript, "Bootstrap JS v5.0.2 StackOverflow" leads nowhere good -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,6 +12,7 @@
     <!-- jQuery link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="script.js"></script>
+    <link rel="stylesheet" href="styles.css" /> <!-- link after Bootstrap to override styles -->
 </head>
 
 <body>
@@ -21,12 +21,12 @@
         <nav class="nav justify-content-center nav-fill mx-4"> <!-- Margin too small! -->
             <a class="nav-link text-white" aria-current="page" href="#">Home</a> <!-- aria-current? -->
             <a class="nav-link text-white" href="#about">About</a>
-            <a class="nav-link text-white" href="#">Previous Work</a>
-            <a class="nav-link text-white" href="#">Projects</a>
-            <a class="nav-link text-white" href="#">Contact</a>
+            <a class="nav-link text-white" href="#work">Previous Work</a>
+            <a class="nav-link text-white" href="#projects">Projects</a>
+            <a class="nav-link text-white" href="#contact">Contact</a>
         </nav>
     </header>
-    <main>
+    <main class="d-flex flex-column flex-wrap justify-content-center align-items-center">
         <!-- Consider editing colors? -->
         <section id="about" class="container my-2 py-5"> <!-- Experiment with (m)argin and (p)adding -->
             <img src="src/profile.png" alt="Profile picture" class="float-start rounded-circle mb-3" />
@@ -48,14 +48,14 @@
                 I believe that the best developers are lifelong learners, and I'm excited to keep growing, building, and
                 sharing my work with the world.</p>
         </section>
-        <section class="container my-5 py-5">
+        <section id="work" class="container my-5 py-5">
             <!-- <img src="src/resume.pdf" alt="Resume PDF" class="float-end mb-3" /> -->
             <!-- <object data="src/resume.pdf" type="application/pdf" width="60%" height="600px">
                 <p>It appears you do not have a PDF plugin for this browser. You can <a href="src/resume.pdf">click here
                         to download my resume.</a></p>
             </object> -->
-            <img src="src/resume.jpg" alt="Resume thumbnail" class="float-end" width="30%" height="auto"
-                data-bs-toggle="modal" data-bs-target="#resumeModal" style="cursor:pointer;">
+            <img src="src/resume.jpg" alt="Resume thumbnail" id="work_resume" class="float-end" data-bs-toggle="modal"
+                data-bs-target="#resumeModal" style="cursor:pointer;">
             <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-xl">
@@ -82,10 +82,10 @@
                 <li>jQuery</li>
             </ul>
         </section>
-        <section id="main-carousel" aria-details="Project slideshow" class="container my-5 py-5">
+        <section id="projects" aria-details="Project slideshow" class="container my-5 py-5">
             <h2>Projects</h2>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
-                aria-describedby="main-carousel">
+                aria-describedby="projects">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                         class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -94,7 +94,7 @@
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
                 </div>
-                <div class="carousel-inner carousel" aria-describedby="main-carousel">
+                <div class="carousel-inner carousel" aria-describedby="projects">
                     <div class="carousel-item active">
                         <img src="https://placebear.com/1200/800" class="d-block w-100"
                             alt="Two bears travelling together">
@@ -120,8 +120,8 @@
                 </button>
             </div>
         </section>
-        <section class="container my-5 py-5">
-            <form>
+        <section id="contact" class="container my-5 py-5">
+            <form class="d-flex flex-column">
                 <h2>Contact Me</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="@email.com" required />
+                    <input type="email" class="form-control" id="email" placeholder="Email Address" required />
                 </div>
                 <div class="mb-3">
                     <label for="message" class="form-label">Message</label>
