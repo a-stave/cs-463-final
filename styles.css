@@ -2,19 +2,38 @@
   box-sizing: border-box;
 }
 
+/* root pseudoclass best used for variable definitions/color schemes */
+:root {
+  color-scheme: light dark;
+  --text-light: #333;
+  --background-light: white;
+  --backdrop-light: #f8f8f8;
+  --header-light: #333;
+  --accent-light: dodgerblue;
+  --text-dark: #ddd;
+  --background-dark: #1a2a3c;
+  --backdrop-dark: #171d25;
+  --header-dark: #12171e;
+  --accent-dark: #0bb5ff;
+}
+
 html {
-  /* background-color: yellow; */
+  /* what belongs in html?*/
+
+  /* Gradient background doesn't work as variables...) */
+  /* background-color: radial-gradient(circle at top left, light-dark(var(--backdrop-light), var(--backdrop-dark)), light-dark(var(--background-light), var(--background-dark))); */
 }
 
 body {
-  background-color: #f0f0f0;
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.2em;
+  /* font: weight, font-size/line-height, font-family */
+  font: 400 1.2em/2 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: light-dark(var(--backdrop-light), var(--backdrop-dark));
+  color: light-dark(var(--text-light), var(--text-dark));
   margin: 0;
 }
 
 main {
-  background-color: white;
+  background-color: light-dark(var(--background-light), var(--background-dark));
   margin: 0 auto;
   width: 70%;
   padding: 1rem;
@@ -37,7 +56,7 @@ main {
 }
 
 header {
-  background-color: #333;
+  background-color: light-dark(var(--header-light), var(--header-dark));
 }
 
 #about img {
@@ -50,13 +69,15 @@ header {
   width: 40%;
   height: auto;
   margin-left: 2.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid light-dark(var(--header-light), var(--header-dark));
   border-radius: 5px;
 }
 
 #contact {
   width: 70%;
-  border: 1px solid #ccc;
+  border: 1px solid light-dark(var(--header-light), var(--header-dark));
+  /* background-color: light-dark(var(--background-light), var(--backdrop-dark)); */
+  background-color: light-dark(#fcfcfc, #313f50);
   border-radius: 5px;
   padding: 1rem;
 }
@@ -69,9 +90,9 @@ header {
 
 #contact form button {
   padding: 0.5rem 1rem;
-  background-color: orange;
+  background-color: light-dark(var(--accent-light), var(--accent-dark));
   border: none;
-  color: white;
+  color: light-dark(var(--background-light), var(--background-light));
   font-size: 1rem;
   align-items: center;
 }
