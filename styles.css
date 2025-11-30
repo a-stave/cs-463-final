@@ -59,6 +59,35 @@ header {
   background-color: light-dark(var(--header-light), var(--header-dark));
 }
 
+.project-description {
+  /* background-color: light-dark(var(--backdrop-light), var(--backdrop-dark)); */
+  border: 2px solid light-dark(var(--header-light), var(--header-dark));
+  background-color: light-dark(#fcfcfc, #313f50);
+  border-radius: 20px;
+  color: light-dark(var(--text-light), var(--text-dark));
+  padding: 5rem 8rem;
+  width: 80%;
+  margin: 80px;
+}
+
+.card {
+  margin: auto;
+}
+
+.card-body {
+  color: light-dark(var(--text-light), var(--text-dark));
+  background-color: light-dark(#fcfcfc, #313f50);
+  border-radius: 4px; /* This seems to overlap another radius rather than overriding it? */
+}
+
+.project-description h3 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid light-dark(var(--text-light), var(--text-dark));
+}
+
 #about img {
   width: 30%;
   height: auto;
