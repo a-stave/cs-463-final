@@ -120,6 +120,7 @@ header {
   font-weight: bold;
   border-bottom: 2px solid light-dark(var(--accent-light), var(--accent-dark));
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellpises;
@@ -144,6 +145,7 @@ header {
 /* Old school solution, but interesting way to handle overflow text */
 #projects .project-blurb {
   display: -webkit-box;
+  line-clamp: 5;
   -webkit-line-clamp: 5; /* number of lines to show */
   overflow: hidden;
   text-overflow: ellipsis;
