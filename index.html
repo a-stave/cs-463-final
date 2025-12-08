@@ -1,65 +1,75 @@
+<!-- https://getbootstrap.com/docs/5.0/getting-started/introduction/
+       Bootstrap documentation -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sample Page</title>
-    <!-- Bootstrap link -->
+    <title>CS 463 Project</title>
+    <!-- Bootstrap CSS and JS links -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery link -->
+    <!-- jQuery and Ajax link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="script.js"></script>
-    <link rel="stylesheet" href="styles.css" /> <!-- link after Bootstrap to override styles -->
+    <!-- link after Bootstrap so personal styles are applied last -->
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+    <!-- Header and navbar, always dark theme to keep it simpler? -->
+    <!-- Uses Bootstrap's responsive menu, but I found it a bit limiting -->
     <header class="text-white text-center py-4">
-        <h1>Personal Website</h1>
-        <nav class="nav justify-content-center nav-fill mx-4"> <!-- Margin too small! -->
-            <a class="nav-link text-white" aria-current="page" href="#">Home</a> <!-- aria-current? -->
-            <a class="nav-link text-white" href="#about">About</a>
-            <a class="nav-link text-white" href="#work">Previous Work</a>
-            <a class="nav-link text-white" href="#projects">Projects</a>
-            <a class="nav-link text-white" href="#contact">Contact</a>
+        <h1>CS 463 Portfolio Website</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse nav-fill justify-content-center px-5 pt-3"
+                    id="navbarSupportedContent">
+                    <a class="nav-item nav-link active text-white" aria-current="page" href="#">Home</a>
+                    <a class="nav-item nav-link text-white" href="#about">About</a>
+                    <a class="nav-item nav-link text-white" href="#work">Previous Work</a>
+                    <a class="nav-item nav-link text-white" href="#projects">Projects</a>
+                    <a class="nav-item nav-link text-white" href="#contact">Contact</a>
+                </div>
+            </div>
         </nav>
     </header>
-    <main class="d-flex flex-column flex-wrap justify-content-center align-items-center">
-        <!-- Consider editing colors? -->
-        <section id="about" class="container my-2 py-5"> <!-- Experiment with (m)argin and (p)adding -->
-            <img src="src/profile.png" alt="Profile picture" class="float-start rounded-circle mb-3" />
+
+    <!-- Use flex to center content -->
+    <main class="d-flex flex-column flex-wrap justify-content-center align-items-center px-3">
+        <section id="about" class="container my-2 py-5">
+            <img src="src/profile-300x400.png" alt="Profile picture" class="float-start rounded-circle mb-3" />
+            <!-- Better to use separate <p>s instead of throwing <br />s into one large <p>...-->
             <h2>About Me</h2>
-            <p>Hi, I'm Aaron Stave, and I'm currently pursuing my studies in web development as part of my academic
-                journey. This portfolio is the culmination of my capstone project, where I've applied the skills I've
-                been building in HTML, CSS, and JavaScript to create a space that reflects both my technical growth and
-                my creative interests. I've always been drawn to the intersection of design and technology, and web
-                development has given me the perfect outlet to combine problem-solving with creativity. <br /> <br />
-                Throughout my coursework, I've worked on projects that range from simple static pages to interactive
-                applications, each one teaching me something new about user experience, accessibility, and the
-                importance of clean, maintainable code. I enjoy exploring new frameworks and tools, and I'm motivated by
-                the challenge of transforming ideas into functional, visually engaging websites. My long-term goal is to
-                continue expanding my technical toolkit and eventually contribute to projects that make a meaningful
-                impact, whether that's through front-end design, full-stack development, or user-focused digital
-                solutions. <br /><br />
-                Outside of coding, I'm curious by nature and love learning new things — whether that's experimenting
-                with design concepts, diving into emerging technologies, or finding inspiration in everyday experiences.
-                I believe that the best developers are lifelong learners, and I'm excited to keep growing, building, and
-                sharing my work with the world.</p>
+            <p>Hi, I'm Aaron, and I'm currently studying computer science at Portland State University! This portfolio
+                page is the culmination of my work in Intro Web Development, where I've broadened the skills I've been
+                building in HTML, CSS, and JavaScript; I've also gained familiarity with established frameworks like
+                Bootstrap, jQuery, and Ajax!</p>
+            <br />
+            <p>Below you will find a summary of my professional and academic experience. My classes have helped build
+                the foundation on which I've been exploring full stack development, especially in the .NET framework.
+                I've also developed my skills in implementing databases using MySQL and creating and using APIs to
+                create dynamic web applications.</p>
+            <br />
+            <p>In addition to my technical skills, I'm fascinated by user experience (UX) design and enjoy learning
+                about how to create beautiful and engaging interfaces. I'm passionate about creating digital
+                experiences that are not only functional but also visually appealing and user-friendly.</p>
         </section>
         <section id="work" class="container my-5 py-5">
-            <!-- <img src="src/resume.pdf" alt="Resume PDF" class="float-end mb-3" /> -->
-            <!-- <object data="src/resume.pdf" type="application/pdf" width="60%" height="600px">
-                <p>It appears you do not have a PDF plugin for this browser. You can <a href="src/resume.pdf">click here
-                        to download my resume.</a></p>
-            </object> -->
-            <img src="src/resume.jpg" alt="Resume thumbnail" id="work_resume" class="float-end" data-bs-toggle="modal"
-                data-bs-target="#resumeModal" style="cursor:pointer;">
+            <img src="src/resume-400x500.png" alt="Resume thumbnail" id="work_resume" class="float-end"
+                data-bs-toggle="modal" data-bs-target="#resumeModal" style="cursor:pointer;">
             <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
+                        <!-- An equal-sized .png is twice the size of this .jpg? I guess keep as is? -->
                         <div class="modal-body text-center">
                             <img src="src/resume.jpg" alt="Full resume" class="img-fluid">
                         </div>
@@ -67,19 +77,20 @@
                 </div>
             </div>
             <h2>Previous Work</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, tenetur aliquid molestias similique aut
-                quos vero repellat earum sed facere repudiandae impedit quae dicta ducimus repellendus neque non
-                eligendi totam! <br /><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur,
-                tempore. Odio ex nihil minima illum id ipsam eum sint et. Totam sed similique voluptatem ad asperiores
-                eaque. Impedit, ipsa doloremque!</p>
+            <p>My coursework at PSU has covered a broad range of topics—Python and bash scripting, CLI applications,
+                Operating Systems, Web Development, etc. In the future I plan on exploring topics such as computer
+                vision and imaging; Internet, web & cloud computing; foundations of AI and NLP; and on building a strong
+                foundation in computer and network security. With a strong foundation I hope to be able to efficiently
+                specialize upon entering the workforce.</p>
             <br />
             <h3>Skills:</h3>
-            <ul>
+            <ul class="grid-container"> <!-- Use CSS grid for this??? -->
                 <li>HTML</li>
                 <li>CSS</li>
                 <li>JavaScript</li>
                 <li>Bootstrap</li>
                 <li>jQuery</li>
+                <li>Ajax</li>
             </ul>
         </section>
         <section id="projects" aria-details="Project slideshow" class="container my-5 py-5">
@@ -87,7 +98,7 @@
             <div id="carouselExampleIndicators" class="carousel slide mt-5" data-bs-ride="carousel"
                 aria-describedby="projects">
                 <div class="carousel-inner" aria-describedby="projects">
-                    <!-- JS will inject carousel-item cards here -->
+                    <!-- GitHub API calls added to DOM here -->
                 </div>
 
                 <!-- Carousel controls -->
@@ -185,7 +196,7 @@
             </div>
         </section> -->
         <section id="contact" class="container my-5 py-5">
-            <form class="d-flex flex-column">
+            <form class="d-flex flex-column" method="POST" action="/something">
                 <h2>Contact Me</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -200,8 +211,9 @@
                     <textarea class="form-control" id="message" rows="5" placeholder="Your message here..."
                         required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
             </form>
+            <div class="form-overlay">Thank you for your feedback!</div> <!-- TODO -->
         </section>
     </main>
     <footer class="bg-dark text-white text-center py-2 footer">

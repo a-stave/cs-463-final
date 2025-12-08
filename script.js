@@ -1,3 +1,11 @@
+/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+ *   JavaScript documentation (see Built-in objects section)
+ * https://docs.github.com/en/rest?apiVersion=2022-11-28
+ *   GitHub REST API documentation
+ *   (unauthenticated requests have 60 requests per hour limit)
+ *   (fetch public repo: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28&versionId=free-pro-team%40latest&restPage=getting-started-with-the-rest-api)
+ */
+
 $(document).ready(() => {
   // To add more projects to the site simply add them to this array. This hopefully makes it easier to add to the
   // project carousel and even lets us use different accounts if we ever abandon our current GitHub account.
@@ -20,6 +28,25 @@ $(document).ready(() => {
       description: "A sample site for testing HTML, CSS, and JS features.",
     },
   ];
+
+  const submitForm = function submitFormUserInput() {
+    const form = $("form");
+    const overlay = $(".form-overlay");
+
+    form.on("submit", function handleSubmit(event) {
+      event.preventDefault();
+      console.log(form[0].elements.name.value);
+      console.log(form[0].elements.email.value);
+      console.log(form[0].elements.message.value);
+
+      form[0].reset();
+
+      overlay.css("opacity", "1");
+      setTimeout(() => {
+        overlay.css("opacity", "0");
+      }, 2000);
+    });
+  };
 
   function latestCommit(owner, repo) {
     return $.ajax({
@@ -157,6 +184,7 @@ $(document).ready(() => {
   }
 
   buildCarousel();
+  submitForm();
 
   // function updateCards() {
   //   $("#projects .card").each(function () {
