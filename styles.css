@@ -1,23 +1,28 @@
-/* https://dev.to/web_dev-usman/every-css-function-you-need-with-practical-examples-23h
+/* CS 463 - Intro Web Development Final Project
+ *   Aaron Stave
+ *   December 2025
+ *
+ * https://dev.to/web_dev-usman/every-css-function-you-need-with-practical-examples-23h
  *   Wide variety of CSS functions for styling, math/animation, filters, gradients, etc.
  * https://css-tricks.com/creating-color-themes-with-custom-properties-hsl-and-a-little-calc/
  *   Using CSS variables and calc() to create shades/tints for better themes.
  * https://css-tricks.com/complete-guide-to-css-functions/
- *   More CSS functions
+ *   More CSS functions (seems like a useful website, honestly!)
  */
 
 * {
   box-sizing: border-box;
 }
 
-/* root pseudoclass best used for variable definitions/color schemes */
+/* Root pseudoclass holds color scheme variables for light and dark modes */
+/* Per above, you could use a calc() to create tints/shades from a base color? */
 :root {
-  color-scheme: light dark;
+  color-scheme: light dark; /* Lets browser know the page can render in either mode */
   --text-light: #333;
   --background-light: white;
-  --backdrop-light: #f8f8f8;
+  --backdrop-light: #ddd;
   --header-light: #333;
-  --accent-light: dodgerblue;
+  --accent-light: #ff3c00;
   --text-dark: #ddd;
   --background-dark: #1a2a3c;
   --backdrop-dark: #171d25;
@@ -25,180 +30,215 @@
   --accent-dark: #0bb5ff;
 }
 
+/* HTML is useful for full-page styling */
 html {
-  /* what belongs in html?*/
-
-  /* Gradient background doesn't work as variables...) */
-  /* background-color: radial-gradient(circle at top left, light-dark(var(--backdrop-light), var(--backdrop-dark)), light-dark(var(--background-light), var(--background-dark))); */
+  font-size: 18px; /* Most sites recommend 16-24px, but you can use 100% if you wish to respect user preferences. */
+  scroll-behavior: smooth; /* No change? Maybe browsers do this automatically? */
+  min-height: 100%; /* Ensures styling reaches bottom of viewport even when lacking content. */
 }
 
-.nav-item:hover {
-  background-color: light-dark(var(--accent-light), var(--accent-dark));
-  color: light-dark(var(--background-light), var(--background-dark));
-}
-
-#about > p::first-letter {
-}
-
+/* Body is the container for all visible content. Concentrate base styles here */
 body {
   /* font: weight, font-size/line-height, font-family */
-  font: 400 1.2em/2 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font: 400 1rem/2 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: light-dark(var(--backdrop-light), var(--backdrop-dark));
   color: light-dark(var(--text-light), var(--text-dark));
   margin: 0;
 }
 
+/* From here on we're free to diverge from conventional styling and make what we want */
 main {
   background-color: light-dark(var(--background-light), var(--background-dark));
-  margin: 0 auto;
-  width: 70%;
-  padding: 1rem;
-  /* filter: drop-shadow(
-    0 0 1rem light-dark(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5))
-  ); */
-  box-shadow: 0 0 1.5rem light-dark(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
+  margin: auto;
+  width: 60%; /* % = relative to parent container; vw = absolute of viewport width */
+  padding: 2rem 4rem;
+  /* Box-shadow probably more performant for this than filter: drop-shadow() */
+  box-shadow: 0 0 2rem light-dark(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
 }
 
-.footer {
-  position: relative;
-  width: 100%;
-  bottom: 0;
-}
-
-.carousel {
-  max-height: 800px;
-}
-
-/* Make all carousel images the same height */
-.carousel-item img {
-  object-fit: cover;
-  height: 800px;
-}
-
+/* Overrides some of bootstrap's navbar styling */
 header {
   background-color: light-dark(var(--header-light), var(--header-dark));
 }
 
-.project-description {
-  /* background-color: light-dark(var(--backdrop-light), var(--backdrop-dark)); */
-  border: 2px solid light-dark(var(--header-light), var(--header-dark));
-  background-color: light-dark(#fcfcfc, #313f50);
-  border-radius: 20px;
-  color: light-dark(var(--text-light), var(--text-dark));
-  padding: 5rem 8rem;
-  width: 80%;
-  margin: 80px;
+/* The hover effect is kinda cool! Makes things pop a bit */
+.nav-item:hover {
+  background-color: light-dark(var(--accent-light), var(--accent-dark));
+  color: light-dark(var(--background-light), var(--background-dark));
 }
 
-.card {
-  margin: auto;
-}
-
-.card-body {
-  color: light-dark(var(--text-light), var(--text-dark));
-  background-color: light-dark(#fcfcfc, #313f50);
-  border-radius: 4px; /* This seems to overlap another radius rather than overriding it? */
-}
-
-.project-description h3 {
-  text-align: center;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-weight: bold;
-  border-bottom: 1px solid light-dark(var(--text-light), var(--text-dark));
-}
-
+/* Professional headshot shrinks with browser */
 #about img {
-  width: 30%;
+  max-width: 100%;
   height: auto;
   margin-right: 2.5rem;
 }
 
+/* Thumbnail styling only, bootstrap modal handles the enlarged version */
 #work_resume {
-  width: 40%;
+  width: 30%;
+  min-width: 300px;
+  /* max-width: 40%; */ /* This doesn't stretch the thumbnail, possibly best alternative */
   height: auto;
   margin-left: 2.5rem;
   border: 1px solid lightgrey;
+  border-radius: 5px;
+  /* Drop-shadow matches its silhouette, kinda neat and compliments box-shadow margin */
   filter: drop-shadow(
     0 0 1rem light-dark(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5))
   );
-  border-radius: 5px;
 }
 
-#contact {
-  width: 70%;
-  border: 1px solid light-dark(var(--header-light), var(--header-dark));
-  /* background-color: light-dark(var(--background-light), var(--backdrop-dark)); */
-  background-color: light-dark(#fcfcfc, #313f50);
-  border-radius: 5px;
-  padding: 1rem;
-
-  position: relative;
-}
-#contact .form-overlay {
-  position: absolute;
-  inset: 0;
-  /* background-color: light-dark(rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.8)); */
-  background-color: light-dark(#fcfcfc, #313f50);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  border-radius: 5px;
-  color: light-dark(var(--text-light), var(--text-dark));
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.6s ease;
-}
-
-/* #contact form input,
-#contact form textarea {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-} */
-
-#contact form button {
-  padding: 0.5rem 1rem;
-  background-color: light-dark(var(--accent-light), var(--accent-dark));
-  border: none;
-  color: light-dark(var(--background-light), var(--background-light));
-  font-size: 1rem;
-  align-items: center;
-}
-
-/* Standardize card dimensions */
-#projects .carousel-item .card {
-  width: 540px; /* consistent width */
-  height: 320px; /* pick a height that works for your layout */
-  display: flex;
-  flex-direction: column;
-}
-
-/* Make card-body stretch evenly */
-#projects .card-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* title at top, footer at bottom */
-}
-
-/* Clamp blurb text to 3 lines with ellipsis */
-#projects .project-blurb {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* number of lines to show */
-  -webkit-box-orient: vertical;
-  line-height: 1.4em; /* adjust line spacing */
-  height: calc(1.4em * 3); /* ensures consistent height */
-}
-
+/* A bit overengineered just to present a list in multiple columns, aye? */
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  padding-left: 15%;
+  gap: 2rem;
+  padding-left: 10%;
   grid-template-areas:
     "li li li"
     "li li li";
+}
+
+/* Scales up to 100% card height or 80% of viewport height, whichever is less */
+.carousel {
+  max-height: 80vh;
+  height: 100%;
+}
+
+/* Part of the problem with using jQuery to construct this section is that styles get mixed up */
+/* Best advice I've found is style classes and apply those to elements using jQuery */
+/* Otherwise you mix your CSS with your JS and get Spaghetti */
+.card {
+  margin: auto;
+  max-width: 70%;
+}
+
+/* Best approach to smaller screens is to truncate title */
+.card h3 {
+  color: light-dark(var(--accent-light), var(--accent-dark));
+  font-weight: bold;
+  border-bottom: 2px solid light-dark(var(--accent-light), var(--accent-dark));
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellpises;
+  -webkit-box-orient: vertical;
+  line-height: 2rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+}
+
+.card img {
+  padding: 1rem;
+}
+
+.card-body {
+  color: light-dark(var(--text-dark), var(--text-dark));
+  background-color: light-dark(#333, #313f50);
+  /* Hard edge where it meets img cutout while conforming to card's outer radius */
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* Old school solution, but interesting way to handle overflow text */
+#projects .project-blurb {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  line-height: 1.5rem; /* adjust line spacing to fit card */
+  height: calc(1.5rem * 5); /* test out calc to determine a height that fits */
+}
+
+/* Contact and overlay must match to avoid clipping */
+#contact {
+  position: relative;
+  width: 60%;
+  padding: 1rem;
+  background-color: light-dark(#fcfcfc, #313f50);
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+#contact > .overlay {
+  /* Fills nearest relative element (#contact), inset is shorthand for top:right:bottom:left */
+  position: absolute;
+  inset: 0;
+  display: flex; /* Centers response text */
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: light-dark(var(--text-light), var(--text-dark));
+  background-color: light-dark(#fcfcfc, #313f50);
+  border-radius: 5px;
+  /* While always there, overlay can't be interacted with and, once opaque, quickly fades again */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+#contact button {
+  font-size: 1rem;
+  color: light-dark(var(--background-light), var(--background-light));
+  background-color: light-dark(var(--accent-light), var(--accent-dark));
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+.footer {
+  position: relative; /* Use fixed if you want a sticky footer, e.g. "Accept Cookies" */
+}
+
+/* Kinda just tacked these on... */
+/* The only goal right now is for extra margin/padding to disappear on smaller screens */
+/* and for float images to be centered and push text below themselves */
+@media (max-width: 767.9px) {
+  html {
+    font-size: 16px;
+  }
+
+  main {
+    width: 100%; /* Clumsy fix for smaller screens, get rid of margin */
+    padding: 2rem 2rem;
+  }
+
+  #about img {
+    justify-content: center;
+    max-width: 100%;
+    height: auto;
+  }
+
+  #work img {
+    min-width: 200px;
+  }
+
+  #contact {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199.9px) {
+  main {
+    width: 80%;
+    box-shadow: 0 0 1rem light-dark(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
+  }
+
+  #work img {
+    min-width: 300px;
+  }
+  #contact {
+    width: 80%;
+  }
+}
+
+/* I'm a bit dismayed Bootstrap's 'carousel-dark' doesn't adjust to light mode */
+/* What, am I supposed to change its class depending on media preference? */
+@media (prefers-color-scheme: light) {
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: invert(1);
+  }
 }

@@ -1,5 +1,7 @@
-<!-- https://getbootstrap.com/docs/5.0/getting-started/introduction/
-       Bootstrap documentation -->
+<!-- CS 463 - Intro Web Development Final Project -->
+<!--   Aaron Stave -->
+<!--   December 2025 -->
+<!-- Bootstrap documentation:   https://getbootstrap.com/docs/5.0/getting-started/introduction/ -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +16,13 @@
     <!-- jQuery and Ajax link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="script.js"></script>
-    <!-- link after Bootstrap so personal styles are applied last -->
+    <!-- link styles after Bootstrap so my styles are applied last -->
     <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <!-- Header and navbar, always dark theme to keep it simpler? -->
-    <!-- Uses Bootstrap's responsive menu, but I found it a bit limiting -->
+    <!-- Header and navbar always one high-contrast theme -->
+    <!-- Uses Bootstrap breakpoints, minimizes on screens <992px wide -->
     <header class="text-white text-center py-4">
         <h1>CS 463 Portfolio Website</h1>
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -32,7 +34,7 @@
                 </button>
                 <div class="collapse navbar-collapse nav-fill justify-content-center px-5 pt-3"
                     id="navbarSupportedContent">
-                    <a class="nav-item nav-link active text-white" aria-current="page" href="#">Home</a>
+                    <a class="nav-item nav-link text-white active" aria-current="page" href="#">Home</a> <!-- aria?-->
                     <a class="nav-item nav-link text-white" href="#about">About</a>
                     <a class="nav-item nav-link text-white" href="#work">Previous Work</a>
                     <a class="nav-item nav-link text-white" href="#projects">Projects</a>
@@ -43,18 +45,26 @@
     </header>
 
     <!-- Use flex to center content -->
-    <main class="d-flex flex-column flex-wrap justify-content-center align-items-center px-3">
+    <!--<main class="d-flex flex-column flex-wrap justify-content-center align-items-center px-3"> -->
+    <main class="d-flex flex-column flex-wrap">
+
+        <!-- 'About' section should include a photo and brief introduction, professional experience preferred -->
         <section id="about" class="container my-2 py-5">
-            <img src="src/profile-300x400.png" alt="Profile picture" class="float-start rounded-circle mb-3" />
-            <!-- Better to use separate <p>s instead of throwing <br />s into one large <p>...-->
+            <!-- Tried srcset, but that seems to conflict with setting width/height in html? -->
+            <img class="float-lg-start rounded-circle mb-3" alt="Professional headshot" width="400" height="500"
+                src="images/profile-400x500.png" />
             <h2>About Me</h2>
-            <p>Hi, I'm Aaron, and I'm currently studying computer science at Portland State University! This portfolio
-                page is the culmination of my work in Intro Web Development, where I've broadened the skills I've been
+            <p>Hi, I'm Aaron, and I'm currently studying computer science at Portland State University! This
+                portfolio
+                page is the culmination of my work in Intro Web Development, where I've broadened the skills I've
+                been
                 building in HTML, CSS, and JavaScript; I've also gained familiarity with established frameworks like
                 Bootstrap, jQuery, and Ajax!</p>
             <br />
-            <p>Below you will find a summary of my professional and academic experience. My classes have helped build
-                the foundation on which I've been exploring full stack development, especially in the .NET framework.
+            <p>Below you will find a summary of my professional and academic experience. My classes have helped
+                build
+                the foundation on which I've been exploring full stack development, especially in the .NET
+                framework.
                 I've also developed my skills in implementing databases using MySQL and creating and using APIs to
                 create dynamic web applications.</p>
             <br />
@@ -62,16 +72,24 @@
                 about how to create beautiful and engaging interfaces. I'm passionate about creating digital
                 experiences that are not only functional but also visually appealing and user-friendly.</p>
         </section>
+
+        <!-- 'Previous Work' expands on professional experience, and may include resume, classes, and skills -->
         <section id="work" class="container my-5 py-5">
-            <img src="src/resume-400x500.png" alt="Resume thumbnail" id="work_resume" class="float-end"
-                data-bs-toggle="modal" data-bs-target="#resumeModal" style="cursor:pointer;">
+            <!-- Mirror of professional photo, need to standardize CSS -->
+            <img id="work_resume" class="float-lg-end mb-3" alt="Resume thumbnail" width="350" height="450"
+                src="images/resume-400x500.png" data-bs-toggle="modal" data-bs-target="#resumeModal"
+                style="cursor:pointer;">
             <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
-                        <!-- An equal-sized .png is twice the size of this .jpg? I guess keep as is? -->
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resumeModalLabel">Resume (updated 10/2025)</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- An equal-sized .png is twice the size of this .jpg? I guess I'll keep as is..? -->
                         <div class="modal-body text-center">
-                            <img src="src/resume.jpg" alt="Full resume" class="img-fluid">
+                            <img src="images/resume.jpg" alt="Full resume" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -83,8 +101,9 @@
                 foundation in computer and network security. With a strong foundation I hope to be able to efficiently
                 specialize upon entering the workforce.</p>
             <br />
+            <!-- Experimented with CSS grid areas, though I don't really like it. Bootstrap should support multi-column lists? -->
             <h3>Skills:</h3>
-            <ul class="grid-container"> <!-- Use CSS grid for this??? -->
+            <ul class="grid-container list-unstyled">
                 <li>HTML</li>
                 <li>CSS</li>
                 <li>JavaScript</li>
@@ -93,12 +112,15 @@
                 <li>Ajax</li>
             </ul>
         </section>
+
+        <!-- 'Projects' is the only thing really worth talking about: -->
+        <!-- Started with Bootstrap's carousel, swapped images for cards and finally to empty container populated by API calls-->
         <section id="projects" aria-details="Project slideshow" class="container my-5 py-5">
             <h2>Projects</h2>
             <div id="carouselExampleIndicators" class="carousel slide mt-5" data-bs-ride="carousel"
                 aria-describedby="projects">
                 <div class="carousel-inner" aria-describedby="projects">
-                    <!-- GitHub API calls added to DOM here -->
+                    <!-- This is where cards are built from API requests and added to the DOM -->
                 </div>
 
                 <!-- Carousel controls -->
@@ -114,89 +136,11 @@
                 </button>
             </div>
         </section>
-        <!-- <section id="projects" aria-details="Project slideshow" class="container my-5 py-5">
-            <h2>Projects</h2>
-            <div id="carouselExampleIndicators" class="carousel slide mt-5" data-bs-ride="carousel"
-                aria-describedby="projects">
-                <div class="carousel-inner carousel" aria-describedby="projects">
-                    <div class="carousel-item active">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                    <a href="https://github.com/a-stave/ChocAn-Project" target="_blank">
-                                        <img src="src/github-mark.svg" style="width: 120px; height: auto;"
-                                            class="img-fluid rounded-start" alt="github link">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h3 class="card-title">ChocAn</h3>
-                                        <p class="card-text project-blurb">This is a wider card with supporting text
-                                            below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                    <a href="https://github.com/a-stave/ms-fs-Logitrack" target="_blank">
-                                        <img src="src/github-mark.svg" style="width: 120px; height: auto;"
-                                            class="img-fluid rounded-start" alt="github link">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h3 class="card-title">Logitrack</h3>
-                                        <p class="card-text project-blurb">This is a wider card with supporting text
-                                            below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                    <a href="https://github.com/a-stave/ms-fs-mocksite.github.io" target="_blank">
-                                        <img src="src/github-mark.svg" style="width: 120px; height: auto;"
-                                            class="img-fluid rounded-start" alt="github link">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h3 class="card-title">MockSite</h3>
-                                        <p class="card-text project-blurb">This is a wider card with supporting text
-                                            below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </section> -->
+
+        <!-- 'Contact' implements a form for feedback. Although interactive, it merely sends input to console... -->
         <section id="contact" class="container my-5 py-5">
             <form class="d-flex flex-column" method="POST" action="/something">
+                <!-- Taken from Code Samples/21-forms -->
                 <h2>Contact Me</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -213,11 +157,17 @@
                 </div>
                 <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
             </form>
-            <div class="form-overlay">Thank you for your feedback!</div> <!-- TODO -->
+            <!-- On submit, overlay is made opaque before easing back into transparent -->
+            <!-- CSS tweaked so that it has the same dimensions as the form itself, right down to border-radius -->
+            <div class="overlay">Thank you for your feedback!</div>
         </section>
     </main>
+
+    <!-- Footer puts in a surprising amount of legwork in making things look professional... Odd. -->
     <footer class="bg-dark text-white text-center py-2 footer">
-        <p>&copy; 2025 Personal Website</p>
+        <p>&copy; 2025 Aaron Stave. <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+                style="color:white;">CC0 1.0
+                Universal</a></p>
     </footer>
 </body>
 

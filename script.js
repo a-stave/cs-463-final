@@ -1,14 +1,18 @@
-/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
- *   JavaScript documentation (see Built-in objects section)
- * https://docs.github.com/en/rest?apiVersion=2022-11-28
- *   GitHub REST API documentation
+/* CS 463 - Intro Web Development Final Project
+ *   Aaron Stave
+ *   December 2025
+ *
+ * Javascript documentation:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+ * GitHub REST API documentation:  https://docs.github.com/en/rest?apiVersion=2022-11-28
  *   (unauthenticated requests have 60 requests per hour limit)
  *   (fetch public repo: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28&versionId=free-pro-team%40latest&restPage=getting-started-with-the-rest-api)
  */
 
+// Ensure DOM is loaded before running scripts
 $(document).ready(() => {
-  // To add more projects to the site simply add them to this array. This hopefully makes it easier to add to the
-  // project carousel and even lets us use different accounts if we ever abandon our current GitHub account.
+  // The best part of this is that you can add more projects to the carousel simply by adding them to this array.
+  // 'Owner' lets you pull data from any public repo, not just your own, handy if you use another account or contribute elsewhere.
+  // API doesn't have anything suitable for a project blurb, so we have to hardcode those in here.
   const repos = [
     {
       owner: "a-stave",
@@ -29,9 +33,11 @@ $(document).ready(() => {
     },
   ];
 
+  // Handles form submission by logging input to console and briefly occluding the form with an overlay so users know it worked.
+  // One day I might make this actually do something, but 'mailto' seemed too clunky to go through with.
   const submitForm = function submitFormUserInput() {
     const form = $("form");
-    const overlay = $(".form-overlay");
+    const overlay = $(".overlay");
 
     form.on("submit", function handleSubmit(event) {
       event.preventDefault();
@@ -48,9 +54,11 @@ $(document).ready(() => {
     });
   };
 
+  // Fetches the latest commit date from a given GitHub repo, limited to 60 requests per hour.
+  // Note this does nothing to verify yours was the last commit, so showcasing contributions is out of the question atm.
   function latestCommit(owner, repo) {
     return $.ajax({
-      //url: `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`,
+      url: `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`,
       method: "GET",
       dataType: "json",
     })
@@ -60,29 +68,10 @@ $(document).ready(() => {
       })
       .catch(() => null);
   }
-  // function timeAgo(isoDate) {
-  //   const diffMs = Date.now() - new Date(isoDate).getTime();
-  //   const minutes = Math.floor(diffMs / 60000);
-  //   if (minutes < 60)
-  //     return `Last updated ${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
-  //   const hours = Math.floor(minutes / 60);
-  //   if (hours < 24)
-  //     return `Last updated ${hours} hour${hours !== 1 ? "s" : ""} ago`;
-  //   const days = Math.floor(hours / 24);
-  //   if (days < 7)
-  //     return `Last updated ${days} day${days !== 1 ? "s" : ""} ago`;
-  //   const weeks = Math.floor(days / 7);
-  //   if (weeks < 4)
-  //     return `Last updated ${weeks} week${weeks !== 1 ? "s" : ""} ago`;
-  //   const months = Math.floor(weeks / 4);
-  //   if (months < 12)
-  //     return `Last updated ${months} month${months !== 1 ? "s" : ""} ago`;
-  //   const years = Math.floor(months / 12);
-  //     return `Last updated ${years} year${years !== 1 ? "s" : ""} ago`;
-  // }
 
-  // Not sure I like this... It's more efficient than precomputing values upfront and also mimics the
-  // short-circuiting behavior of the if-else chain above, but cases aren't as simple as they could be...
+  // Converts a date into human-readable "time ago" format, ranging from minute(s) to year(s).
+  // Not sure I like this... More efficient than precomputing all values upfront, and it mimics an if-else
+  // chain's short-circuiting behavior so it's as efficient as can be, but cases aren't intuitive...
   function timeAgo(isoDate) {
     const diffMs = Date.now() - new Date(isoDate).getTime();
     const minutes = Math.floor(diffMs / 60000);
@@ -120,6 +109,8 @@ $(document).ready(() => {
     }
   }
 
+  // Builds out the project carousel dynamically from the functions above, the 'repos' array, and API fetches.
+  // One major drawback is that the cards are "built" here instead of in HTML, making it harder to tweak styling.
   function buildCarousel() {
     const $carouselInner = $("#carouselExampleIndicators .carousel-inner");
 
@@ -128,12 +119,12 @@ $(document).ready(() => {
         .addClass("carousel-item")
         .toggleClass("active", index === 0);
 
-      const $card = $("<div>")
-        .addClass("card mb-3 h-100")
-        .css("max-width", "540px");
-      const $row = $("<div>").addClass("row g-0 h-100");
+      const $card = $("<div>").addClass("card mb-3");
+      const $row = $("<div>").addClass("row g-0");
 
-      // Left column: GitHub logo link
+      // Left column: Project logo or image (click to go to repo)
+      // Currently uses GitHub logo as placeholder, can be swapped out for repo-specific images later
+      // by adding an 'image' field to each repo object.
       const $colLeft = $("<div>")
         .addClass("col-md-4 d-flex justify-content-center align-items-center")
         .append(
@@ -143,34 +134,33 @@ $(document).ready(() => {
             .append(
               $("<img>")
                 .attr({
-                  src: "src/github-mark.svg",
+                  src: "images/github-mark.svg",
                   alt: "github link",
                 })
-                .css({ width: "120px", height: "auto" })
                 .addClass("img-fluid rounded-start")
             )
         );
 
-      // Right column: card body
+      // Right column: Project title and description
       const $colRight = $("<div>")
-        .addClass("col-md-8")
+        .addClass("col-md-8 align-items-start")
         .append(
           $("<div>")
             .addClass("card-body")
             .append(
-              $("<h3>").addClass("card-title").text(repo.title),
+              $("<h3>").addClass("card-title").text(repo.name),
               $("<p>")
                 .addClass("card-text project-blurb")
                 .text(repo.description)
             )
         );
-
       $row.append($colLeft, $colRight);
       $card.append($row);
       $item.append($card);
       $carouselInner.append($item);
 
-      // Fetch commit date and append footer
+      // Right column continued: Fetch and append latest commit date
+      // Check JSON response for other data you might append here
       latestCommit(repo.owner, repo.name).then((commitDate) => {
         const text = commitDate
           ? `<small class="text-muted">${timeAgo(commitDate)}</small>`
@@ -183,31 +173,7 @@ $(document).ready(() => {
     });
   }
 
+  // After all that, we can finally call our functions...
   buildCarousel();
   submitForm();
-
-  // function updateCards() {
-  //   $("#projects .card").each(function () {
-  //     const $card = $(this);
-  //     const $link = $card.find('a[href*="github.com"]');
-  //     if ($link.length === 0) return;
-
-  //     // Extract repo from the href
-  //     const match = $link.attr("href").match(/github\.com\/([^/]+)\/([^/]+)/);
-  //     if (!match) return;
-  //     const [, owner, repo] = match;
-
-  //     const $body = $card.find(".card-body");
-
-  //     latestCommit(owner, repo).then(function (commitDate) {
-  //       const text = commitDate
-  //         ? `<small class="text-muted">${timeAgo(commitDate)}</small>`
-  //         : `<small class="text-muted">Could not fetch update time</small>`;
-
-  //       $("<p>").addClass("card-text").html(text).appendTo($body);
-  //     });
-  //   });
-  // }
-
-  // updateCards();
 });
